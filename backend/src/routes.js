@@ -3,6 +3,7 @@ const {
 } = require('express');
 const axios = require('axios');
 const DevController = require('./controllers/DevController');
+const SearchController = require('./controllers/SearchController');
 
 const routes = Router();
 
@@ -37,9 +38,11 @@ routes.post('/tests', (req, res) => {
   });
 });
 
-//Insert New Dev
+//Insert Dev
 routes.post('/devs', DevController.store);
-//list devs
+//List Devs
 routes.get('/devs', DevController.index);
+//Search Devs
+routes.get('/search', SearchController.index);
 
 module.exports = routes;

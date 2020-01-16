@@ -3,7 +3,7 @@ const Dev = require('../models/Dev');
 const {
   dbg
 } = require('../debug/Debug');
-
+const parseStringArray = require('../utils/parseStringArray');
 //Controller should have only 5 functions
 //  index - list all
 //  show    list one
@@ -34,7 +34,7 @@ function store(req, res) {
         const {
           name = login, avatar, avatar_url, bio
         } = gitUserData.data;
-        techsList = techs.split(',').map(tech => tech.trim());
+        techsList = parseStringArray(techs);
         const location = {
           type: 'Point',
           coordinates: [longitude, latitude]

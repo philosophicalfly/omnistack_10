@@ -2,8 +2,7 @@ const {
   Router
 } = require('express');
 const axios = require('axios');
-const moment = require('moment');
-const Dev = require('./models/Dev');
+const DevController = require('./controllers/DevController');
 
 const routes = Router();
 
@@ -39,69 +38,8 @@ routes.post('/tests', (req, res) => {
 });
 
 //Insert New Dev
-routes.post('/devs', (req, res) => {
-  const {
-    gitUser,
-    techs,
-    latitude,
-    longitude
-  } = req.body;
-  dbg(`Received user ${gitUser}.`);
-  dbg('Getting GitHub user data...');
-  getGithubUserData(gitUser).then(gitUserData => {
-    const {
-      name = login, avatar, avatar_url, bio
-    } = gitUserData.data;
-    techsList = techs.split(',').map(tech => tech.trim());
-    const location = {
-      type: 'Point',
-      coordinates: [longitude, latitude]
-    };
-    const userObj = {
-      name,
-      gitUser,
-      bio,
-      avatarUrl: avatar_url,
-      techs: techsList,
-      location
-    }
-    dbg('Got GitHub user data.');
-    dbg(userObj);
-    saveUserToDatabase(userObj).then(savedDev => {
-      return res.json({
-        dev: savedDev
-      });
-    });
-  }).catch(err => {
-    return res.json({
-      error: err
-    });
-  });
-});
-
-function getGithubUserData(gitUser) {
-  return new Promise((resolve, reject) => {
-    axios.get(`https://api.github.com/users/${gitUser}`).then(gitUserData => {
-      return resolve(gitUserData);
-    }).catch(err => {
-      return reject(err);
-    });
-  });
-}
-
-function saveUserToDatabase(userObj) {
-  return new Promise((resolve, reject) => {
-    Dev.create(userObj).then(response => {
-      return resolve(response);
-    }).catch(err => {
-      return reject(err);
-    });
-  });
-}
-
-function dbg(data) {
-  const dateTime = moment().format('MM/DD/YYYY H:mm:ss');
-  console.log(dateTime + ' DEBUG: ' + JSON.stringify(data));
-}
+routes.post('/devs', DevController.store);
+//list devs
+routes.get('/devs', DevController.index);
 
 module.exports = routes;

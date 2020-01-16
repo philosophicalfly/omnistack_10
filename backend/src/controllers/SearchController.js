@@ -5,13 +5,6 @@ const {
 } = require('../debug/Debug');
 const parseStringArray = require('../utils/parseStringArray');
 
-//Controller should have only 5 functions
-//  index - list all
-//  show    list one
-//  store   adds one
-//  update  modify one
-//  destroy delete one
-
 //Check $in filter and more filtes
 //Mongo operators
 

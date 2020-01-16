@@ -5,9 +5,11 @@ const {
 } = require('../debug/Debug');
 const parseStringArray = require('../utils/parseStringArray');
 //Controller should have only 5 functions
+//  DONE
 //  index - list all
-//  show    list one
 //  store   adds one
+//  TODO
+//  show    list one
 //  update  modify one
 //  destroy delete one
 

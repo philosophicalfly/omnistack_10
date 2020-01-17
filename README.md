@@ -1,2 +1,8 @@
-# omnistack_10
-Desenvolvimento do App da Semana Omnistack 10
+# :construction: omnistack_10 :construction:
+
+## Desenvolvimento do App da Semana Omnistack 10
+
+- [x] :cloud: Backend
+- [ ] :computer: React
+- [ ] :iphone: React Native
+- [ ] :rocket: Advanced Features 
